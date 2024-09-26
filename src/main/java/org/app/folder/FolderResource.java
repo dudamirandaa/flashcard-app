@@ -5,22 +5,25 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.app.model.Folder;
 
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 @Path("/folders")
 public class FolderResource {
 
     private FolderService folderService = new FolderService();
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getAllFolders() {
-        return "teste";
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Folder> getAllFolders() {
+        return folderService.findAll();
     }
 
     @GET
     @Path("/{folder}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFolder(@PathParam("folder") String folderName) {
-        Folder folder = (Folder) folderService.find(folderName);
+        Folder folder = folderService.find(folderName);
 
         if (folder == null) {
             return Response.status(404).entity("Folder not found").build();

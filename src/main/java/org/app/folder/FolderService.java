@@ -3,9 +3,16 @@ package org.app.folder;
 import org.app.model.Folder;
 import org.app.util.JPAUtil;
 
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 public class FolderService {
 
-    public Object find(String folder) {
-        return JPAUtil.find(Folder.class, folder);
+    public Folder find(String folder) {
+        return FolderRepository.find(Folder.class, folder);
+    }
+
+    public List<Folder> findAll() {
+        return JPAUtil.findAll();
     }
 }

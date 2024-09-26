@@ -12,10 +12,10 @@ import java.util.Set;
 @ApplicationPath("/api")
 public class FlashcardAPP extends Application {
 
-    @Override
-    public Set<Class<?>> getClasses() {
-        Set<Class<?>> resources = new HashSet<>();
-        resources.add(FolderResource.class);
-        return resources;
-    }
+//    @Override
+//    public Set<Class<?>> getClasses() {
+//        Set<Class<?>> resources = new HashSet<>();
+//        resources.add(FolderResource.class);
+//        return resources;
+//    }
 }

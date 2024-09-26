@@ -8,6 +8,8 @@ import org.app.model.Folder;
 @Path("/folders")
 public class FolderResource {
 
+    private FolderService folderService = new FolderService();
+
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getAllFolders() {
@@ -18,7 +20,13 @@ public class FolderResource {
     @Path("/{folder}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFolder(@PathParam("folder") String folderName) {
-        return Response.ok().entity(new Folder(folderName)).build();
+        Folder folder = (Folder) folderService.find(folderName);
+
+        if (folder == null) {
+            return Response.status(404).entity("Folder not found").build();
+        }
+
+        return Response.ok().entity(folder).build();
     }
 
     @POST
